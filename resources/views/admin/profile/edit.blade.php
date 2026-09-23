@@ -1,0 +1,12 @@
+@extends('layouts.admin')
+@section('title', 'Thông tin cá nhân')
+@section('heading', 'Thông tin cá nhân')
+@section('content')
+<form method="POST" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data">@csrf @method('PUT')
+<section class="admin-card"><div class="card-heading"><div><span>HỒ SƠ</span><h2>Ảnh đại diện & giới thiệu</h2></div></div>
+    <div class="profile-upload"><div class="avatar-preview">@if($profile->avatar)<img src="{{ Storage::url($profile->avatar) }}" alt="">@else<span>{{ mb_substr($profile->full_name, 0, 1) }}</span>@endif</div><label class="upload-button">Chọn ảnh mới<input type="file" name="avatar" accept="image/png,image/jpeg,image/webp"></label><small>JPG, PNG hoặc WebP. Tối đa 4MB.</small></div>
+    <div class="form-grid"><label>Họ và tên *<input name="full_name" value="{{ old('full_name', $profile->full_name) }}" required></label><label>Tiêu đề nghề nghiệp<input name="headline" value="{{ old('headline', $profile->headline) }}"></label><label>Giới tính<select name="gender"><option value="">Chọn</option>@foreach(['Nam','Nữ','Khác'] as $gender)<option @selected(old('gender', $profile->gender)===$gender)>{{ $gender }}</option>@endforeach</select></label><label>Ngày sinh<input type="date" name="birth_date" value="{{ old('birth_date', $profile->birth_date?->format('Y-m-d')) }}"></label><label class="span-2">Giới thiệu<textarea name="bio" rows="6">{{ old('bio', $profile->bio) }}</textarea></label><label class="span-2">Sở thích <small>(phân cách bằng dấu phẩy)</small><input name="interests" value="{{ old('interests', implode(', ', $profile->interests ?? [])) }}"></label></div>
+</section>
+<section class="admin-card"><div class="card-heading"><div><span>LIÊN HỆ</span><h2>Thông tin & mạng xã hội</h2></div></div><div class="form-grid"><label>Email<input type="email" name="email" value="{{ old('email', $profile->email) }}"></label><label>Số điện thoại<input name="phone" value="{{ old('phone', $profile->phone) }}"></label><label class="span-2">Địa điểm<input name="location" value="{{ old('location', $profile->location) }}"></label><label>GitHub URL<input type="url" name="github_url" value="{{ old('github_url', $profile->github_url) }}"></label><label>Facebook URL<input type="url" name="facebook_url" value="{{ old('facebook_url', $profile->facebook_url) }}"></label></div></section>
+<div class="form-actions"><button class="button primary" type="submit">Lưu thay đổi</button></div></form>
+@endsection

@@ -1,0 +1,35 @@
+.form-hint {
+    color: var(--muted);
+    font-size: 11px;
+    margin: -10px 0 24px;
+}
+
+.account-note {
+    align-items: flex-start;
+    background: #f2f7f3;
+    border-left: 3px solid #4f7d68;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    padding: 13px 16px;
+}
+
+.account-note > span {
+    background: var(--forest);
+    border-radius: 50%;
+    color: #fff;
+    display: grid;
+    flex: none;
+    font-size: 10px;
+    font-weight: 800;
+    height: 20px;
+    place-items: center;
+    width: 20px;
+}
+
+.account-note p {
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.6;
+    margin: 1px 0;
+}

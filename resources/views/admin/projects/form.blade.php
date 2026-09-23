@@ -1,0 +1,9 @@
+@extends('layouts.admin')
+@section('title', $project->exists ? 'Sửa dự án' : 'Thêm dự án')
+@section('heading', $project->exists ? 'Sửa dự án' : 'Thêm dự án mới')
+@section('content')
+<form method="POST" action="{{ $project->exists ? route('admin.projects.update', $project) : route('admin.projects.store') }}" enctype="multipart/form-data">@csrf @if($project->exists) @method('PUT') @endif
+<section class="admin-card"><div class="card-heading"><div><span>CHI TIẾT DỰ ÁN</span><h2>{{ $project->exists ? $project->name : 'Tạo một dự án mới' }}</h2></div></div>
+<div class="form-grid"><label class="span-2">Tên dự án *<input name="name" value="{{ old('name', $project->name) }}" required></label><label class="span-2">Mô tả ngắn *<textarea name="description" rows="6" required>{{ old('description', $project->description) }}</textarea></label><label>Đường dẫn dự án<input type="url" name="url" value="{{ old('url', $project->url) }}" placeholder="https://..."></label><label>Thời gian hoàn thiện<input type="date" name="completed_at" value="{{ old('completed_at', $project->completed_at?->format('Y-m-d')) }}"></label><label>Thứ tự hiển thị<input type="number" name="sort_order" value="{{ old('sort_order', $project->sort_order ?? 0) }}" min="0"></label><label class="check field-check"><input type="checkbox" name="is_visible" value="1" @checked(old('is_visible', $project->exists ? $project->is_visible : true))> Hiển thị trên trang chủ</label><label class="span-2">Ảnh dự án<input type="file" name="image" accept="image/png,image/jpeg,image/webp"><small>JPG, PNG hoặc WebP. Tối đa 50MB.</small></label>@if($project->image)<div class="span-2 current-image"><img src="{{ Storage::url($project->image) }}" alt=""></div>@endif</div>
+</section><div class="form-actions"><a class="button ghost" href="{{ route('admin.projects.index') }}">Hủy</a><button class="button primary" type="submit">{{ $project->exists ? 'Lưu thay đổi' : 'Tạo dự án' }}</button></div></form>
+@endsection

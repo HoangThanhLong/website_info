@@ -1,0 +1,27 @@
+.project-image img {
+    display: block;
+    height: auto;
+    left: 0;
+    object-position: top;
+    position: absolute;
+    top: 0;
+    transition: none;
+    width: 100%;
+    will-change: transform;
+}
+
+.project-card:hover .project-image img {
+    transform: none;
+}
+
+.project-image img.project-image-cover {
+    height: 100%;
+    object-fit: cover;
+    will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project-image img {
+        will-change: auto;
+    }
+}
